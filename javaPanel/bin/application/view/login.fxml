@@ -8,18 +8,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" 
-prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.loginController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.loginController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="username :">
          <VBox.margin>
             <Insets right="100.0" />
          </VBox.margin>
       </Text>
-      <HBox fx:id="userField" alignment="CENTER" prefHeight="37.0" prefWidth="600.0">
+      <HBox alignment="CENTER" prefHeight="37.0" prefWidth="600.0">
          <children>
-            <TextField prefHeight="26.0" prefWidth="166.0" />
+            <TextField fx:id="userField" prefHeight="26.0" prefWidth="166.0" />
          </children>
       </HBox>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password :">

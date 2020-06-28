@@ -1,5 +1,16 @@
 package application.controllers;
 
-public class dashboardController {
+
+import application.models.ControllerClass;
+import application.models.Staff;
+
+
+public class dashboardController implements ControllerClass{
+
+	@Override
+	public void preloadData(Staff staff) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
