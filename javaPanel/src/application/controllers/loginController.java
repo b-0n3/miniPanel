@@ -3,6 +3,7 @@ package application.controllers;
 import application.models.ControllerClass;
 import application.models.SceneChanger;
 import application.models.Staff;
+import application.models.apiReq;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -29,18 +30,18 @@ public class loginController {
     			if (userField.getText().equals("admin") && passField.getText().equals("admin"))
     			{
 //    				Staff staff = req.getStaff();
-    				Staff staff = null;
-    				ControllerClass cc = new dashboardController();
-    				SceneChanger cn = new SceneChanger();
-    				try {
-    				cn.changeScenes(event, "/application/view/Dashboard.fxml", "dashboard" , staff, cc);
-    				}catch(Exception ex)
-    				{
-    					ex.printStackTrace();
-    				}
-    			
-    			
+//    				Staff staff = null;
+//    				ControllerClass cc = new dashboardController();
+//    				SceneChanger cn = new SceneChanger();
+//    				try {
+//    				cn.changeScenes(event, "/application/view/Dashboard.fxml", "dashboard" , staff, cc);
+//    				}catch(Exception ex)
+//    				{
+//    					ex.printStackTrace();
+//    				}
     			}
+    			apiReq api = new apiReq("http://localhost/templ");
+    			System.out.println(api.simpleRequest());
     			
     		});
 

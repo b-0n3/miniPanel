@@ -1,7 +1,7 @@
 package application.models;
 
 public class Staff {
-	private String firstName, lastName,email,passWord,phoneNumber;
+	private String firstName, lastName,email,passWord,phoneNumber,cookie;
 	
 	public Staff(String firstName , String lastName, String email, String passWord, String phoneNumber)
 	{
@@ -19,15 +19,20 @@ public class Staff {
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
-	   /**
-     * area code    city    house 
-     * NXX          -XXX    -XXXX
-     * @param phoneNumber 
-     */
+	  
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
+	public void handleCookie()
+	{
+		
+	}
+	 /**
+     * area code    city    house 
+     * NXX          -XXX    -XXXX
+     * @param phoneNumber 
+     */
 	public void setPhoneNumber(String phoneNumber) {
 		if (phoneNumber.matches("[0-9]\\d{2}[-.]?\\d{3}[-.]\\d{4}"))
             this.phoneNumber = phoneNumber;
@@ -59,6 +64,14 @@ public class Staff {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+	public String getCookie() {
+		return cookie;
+	}
+
+	public void setCookie(String cookie) {
+		this.cookie = cookie;
 	}
 	
 	

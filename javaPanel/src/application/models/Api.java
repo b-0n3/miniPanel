@@ -51,14 +51,20 @@ public class Api {
 			{
 				bf = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 				while ((line = bf.readLine()) != null)
+				{
 					res.append(line);
-				bf.close();
+					res.append('\n');
+				}
+					bf.close();
 			}else
 			{
 				bf = new BufferedReader(new InputStreamReader(con.getInputStream()));
 				while((line = bf.readLine()) != null)
+				{
 						res.append(line);
-					bf.close();
+						res.append('\n');
+				}
+						bf.close();
 			}
 			}
 			catch(Exception e)
