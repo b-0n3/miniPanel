@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface ControllerClass {
 	public abstract  void preloadData( Staff staff);
+	public abstract  void preloadData( Staff staff, Post post);
 }

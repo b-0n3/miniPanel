@@ -4,7 +4,7 @@ import java.util.List;
 
 public class StaffJsonHandler<T> extends JsonHandler<T> {
 	@Override 
-	public String build() {
+	public String build(List<T> elemt) {
 		 String req = "";
 		 return req;
 	 }

@@ -10,9 +10,9 @@ public class apiReq extends Api {
 	{
 		String res = "";
 		addProperty("filename", filename);
-		addProperty("cookie", staff.getCookie());
+		//addProperty("cookie", staff.getCookie());
 		addProperty("operation", operation);
-		res = send();
+		res = send("POST",false);
 		return res;
 	}
 	
@@ -20,14 +20,14 @@ public class apiReq extends Api {
 		String res = "";
 		addProperty("username",  username);
 			addProperty("password", password);
-			res = send();
+			res = send("POST",false);
 		return res;
 	}
 	
 	public String testCookie(Staff staff)
 	{
 		String res = "";
-		addProperty("cookie", staff.getCookie());
+		//addProperty("cookie", staff.getCookie());
 		return res;
 	}
 	
@@ -35,7 +35,7 @@ public class apiReq extends Api {
 	public String simpleRequest()
 	{
 		String res = "";
-		res = send();
+		res = send("GET",false);
 		return res;
 	}
 }

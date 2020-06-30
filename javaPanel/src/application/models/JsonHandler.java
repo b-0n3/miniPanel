@@ -11,7 +11,18 @@ abstract class JsonHandler<T> {
 		array = new JSONArray();
 	}
 	
-	 abstract String build();
+	 abstract String build(List<T> element);
 	 abstract List<T> parse(String res);
-	
+	public JSONArray getArray()
+	{
+		return this.array;
+	}
+	public void addElement(JSONObject element)
+	{
+		if (element != null)
+		{
+			this.array.put(element);
+		}
+		
+	}
 }
