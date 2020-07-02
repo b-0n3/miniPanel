@@ -48,4 +48,7 @@ public class Token {
 		}
 		return token;
 	}
-}
+	public void addAuthorization(apiReq api) {
+		api.addProperty("Authorization", "Bearer " + this.getToken());
+	}
+}	

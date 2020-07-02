@@ -24,8 +24,7 @@ public class CommentHolder<T> extends DataHolder<T> {
 	public void preloadData() {
 		
 		Comment cmt = (Comment) this.data;
-		content = new Text();
-		name = new Text();
+		
 		ownerEmail = new Text();
 		website = new Text();
 		this.content.setText(cmt.getContent());

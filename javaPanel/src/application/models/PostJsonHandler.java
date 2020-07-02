@@ -14,19 +14,20 @@ public class PostJsonHandler<T>  extends JsonHandler<T>{
 		 if (posts != null)
 		 {
 			 JSONObject all = new JSONObject();
-			 JSONObject holder = new JSONObject();
+			 
 			 JSONArray array = new JSONArray();
 			 for(Post ps :(List<Post>)posts ) {
 			 
-			 all.put("name", ps.getName() );
-			 all.put("Content", ps.getContent());
-			 all.put("owner", ps.getOwner().getJsonObject());
+			 all.put("name", ps.getTitle());
+			 all.put("content", ps.getContent());
+			 all.put("user_id", ps.getOwnerid());
 			 all.put("Categery", ps.getCategery());
 			 all.put("id", ps.getId());
+			// all.put("image", ps.getImage().getName());
 			 
 			
-			 holder.put("Post", all);
-			 array.put(holder);
+			
+			 array.put(all);
 			 }
 			 req = array.toString();
 			 }
@@ -34,19 +35,15 @@ public class PostJsonHandler<T>  extends JsonHandler<T>{
 	 }
 	 @Override
 	 public List<T> parse(String res) {
-
-		 JSONArray array = new JSONArray(res);
-		 List<Post> Posts = new ArrayList<Post>();
+		 JSONObject js= new JSONObject(res);
+		 JSONArray array = js.getJSONArray("data");
+		 List<T> Posts = new ArrayList<T>();
 	
 		 array.forEach(ar->{
-//			 JSONObject post = (JSONObject)((JSONObject)ar).get("Post");
-//			Posts.add(new Post((String)post.get("name"),(String)post.get("Content"),
-//					Staff.fromJsonObject((JSONObject)post.get("owner"))
-//					,(String)post.get("id") , (String)post.get("Categery")));
-			
+			 Posts.add((T)Post.fromJsonObject((JSONObject) ar));
 		 });
 		 
-		 return  (List<T>) Posts;
+		 return Posts;
 	 }
 
 }

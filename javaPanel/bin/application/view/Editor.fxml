@@ -3,61 +3,43 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<HBox prefHeight="600.0" prefWidth="1134.0" spacing="10.0" xmlns="http://jahtmlFieldvafx.htmlFieldhtmlFieldcom/javafx/11.0.1"
+<HBox prefHeight="674.0" prefWidth="1156.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1"
  xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.editorController">
    <children>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="191.0" spacing="30.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="name" />
-            <HBox alignment="CENTER">
-               <children>
-                  <TextField fx:id="Postname" prefHeight="26.0" prefWidth="123.0" promptText="post name" />
-               </children>
-            </HBox>
-            <Button fx:id="editHtmlEnable" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" text="edit Html" />
-            <HBox alignment="CENTER" spacing="20.0">
-               <children>
-                  <Button fx:id="Tcancel" mnemonicParsing="false" text="Cancel" />
-                  <Button fx:id="TSave" mnemonicParsing="false" text="save" />
-               </children>
-            </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="180.72949981689453" VBox.vgrow="ALWAYS" />
-         </children>
-      </VBox>
       <VBox>
          <children>
             <HBox prefHeight="44.0" prefWidth="730.0" spacing="20.0">
                <children>
-                  <Button fx:id="editText" mnemonicParsing="false" text="Text" />
+                  <Button fx:id="editText" mnemonicParsing="false" text="Visual" />
                   <Button fx:id="editHtml" mnemonicParsing="false" text="Html" />
+                  <TextField fx:id="Postname" prefHeight="26.0" prefWidth="607.0" promptText="title" />
+                  <Button fx:id="TSave" mnemonicParsing="false" text="save" />
+                  <Button fx:id="Tcancel" mnemonicParsing="false" text="Cancel" />
                </children>
                <padding>
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <ScrollPane fx:id="ScrPane" pannable="true">
-               <content>
-                  <Pane>
-                     <children>
-                        <TextArea fx:id="htmlField" prefHeight="582.0" prefWidth="710.0" />
-                        <HTMLEditor fx:id="HtmlEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="600.0" prefWidth="730.0" />
-                     </children>
-                  </Pane>
-               </content>
-            </ScrollPane>
+            <Pane>
+               <children>
+                  <TextArea fx:id="htmlField" prefHeight="582.0" prefWidth="914.0" />
+                  <HTMLEditor fx:id="HtmlEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="618.0" prefWidth="911.0" />
+               </children>
+            </Pane>
          </children>
       </VBox>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="202.0" spacing="20.0">
+      <VBox alignment="CENTER" prefHeight="674.0" prefWidth="230.0" spacing="20.0">
          <children>
+            <Circle fx:id="postImg" fill="DODGERBLUE" radius="57.0" stroke="BLACK" strokeType="INSIDE" />
             <VBox alignment="CENTER" spacing="10.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="tags" />
@@ -66,23 +48,21 @@
                   <Button fx:id="addTag" mnemonicParsing="false" text="save " />
                </children>
             </VBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categery" />
-            <ComboBox fx:id="CategeryBox" prefWidth="150.0" promptText="Categery" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add categery" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category" />
+            <ComboBox fx:id="CategeryBox" prefWidth="150.0" promptText="Category" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add category" />
             <TextField fx:id="CategeryName" promptText="Categery" />
             <HBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Button fx:id="CancelCategery" mnemonicParsing="false" text="Cancel" />
-                  <Button fx:id="SaveCategery" mnemonicParsing="false" text="new Categery" />
+                  <Button fx:id="SaveCategery" mnemonicParsing="false" text="add Category" />
                </children>
             </HBox>
             <VBox alignment="CENTER" spacing="7.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="images" />
-                  <HBox spacing="20.0">
+                  <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button fx:id="AddLocalImage" mnemonicParsing="false" text="Add local image" />
-                        <Button fx:id="SendImage" mnemonicParsing="false" text="send" />
+                        <Button fx:id="AddLocalImage" mnemonicParsing="false" text="upload image" />
                      </children>
                   </HBox>
                   <TextField fx:id="Link" promptText="link" />

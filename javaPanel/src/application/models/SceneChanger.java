@@ -50,4 +50,25 @@ public class SceneChanger {
 	        stage.setScene(scene);
 	        stage.show();
 	    }
+
+		public void changeScenes(ActionEvent event, String string, String string2, Staff staff, ControllerClass db,
+				Post pp) throws IOException {
+			 FXMLLoader loader = new FXMLLoader();
+		        loader.setLocation(getClass().getResource(string));
+		        Parent parent = loader.load();
+		        
+		        Scene scene = new Scene(parent);
+		        
+		        //access the controller class and preloaded the volunteer data
+		        db = loader.getController();
+		        db.preloadData(staff,pp);
+		        
+		        //get the stage from the event that was passed in
+		        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		        
+		        stage.setTitle(string2);
+		        stage.setScene(scene);
+		        stage.show();
+			
+		}
 }

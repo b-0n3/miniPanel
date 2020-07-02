@@ -1,8 +1,12 @@
 package application.controllers;
 
+import java.util.ArrayList;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javafx.application.Platform;
+import application.models.Categery;
 import application.models.ControllerClass;
 import application.models.SceneChanger;
 import application.models.Staff;
@@ -58,6 +62,7 @@ Platform.runLater(new Runnable() {
     					token.getToken());
     					staff = Staff.fromJsonObject(new JSONObject(api.send("POST", false)));
     					staff.setToken(token);
+    					getCategerys(staff);
     					ControllerClass db = new dashboardController();
     					SceneChanger sn = new SceneChanger();
     					sn.changeScenes(event, "/application/view/dashboard.fxml", "Dashboard", staff, db);
@@ -85,5 +90,17 @@ Platform.runLater(new Runnable() {
 
     		});
 
+    }
+    
+    public void getCategerys(Staff staff)
+    {
+    	apiReq api = new apiReq(Staff.APILINK+"/categories/");
+    	api.addProperty("Authorization", "Bearer " + staff.getToken().getToken());
+		String responce = api.send("GET", false);
+		System.out.println(responce);
+		if (Staff.categerys != null)
+			Staff.categerys.clear();
+		Staff.categerys =Categery.fromJsonArray(new JSONArray(responce));
+		
     }
 }

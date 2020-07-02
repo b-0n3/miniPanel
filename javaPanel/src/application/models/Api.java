@@ -5,10 +5,13 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -156,6 +159,65 @@ public class Api {
 		else
 			throw new IllegalArgumentException("Connection Error!");
 			return res.toString();
+	}
+	
+
+	public String sendImage(File file,int postId) throws IOException
+	{
+		
+		String boundary = Long.toHexString(System.currentTimeMillis()); // Just generate some unique random value.
+	con.setDoOutput(true); // This sets request method to POST.
+		con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+		PrintWriter writer = null;
+		try {
+		    writer = new PrintWriter(new OutputStreamWriter(con.getOutputStream()));
+		    if(postId != -404)
+		    	writer.println("Post-id:" + postId);
+		    writer.println("--" + boundary);
+		    writer.println("Content-Disposition: form-data; name=\"picture\"; filename=\""+file.getName()+"\"");
+		    writer.println("Content-Type: image/jpeg");
+		   
+		    writer.println();
+		    BufferedReader reader = null;
+		    try {
+		        reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		        for (String line; (line = reader.readLine()) != null;) {
+		            writer.println(line);
+		        }
+		    } finally {
+		        if (reader != null) try { reader.close(); } catch (IOException logOrIgnore) {}
+		    }
+		    writer.println("--" + boundary + "--");
+		} finally {
+		    if (writer != null) writer.close();
+		}
+		int status = con.getResponseCode();
+		System.out.println(status);
+		BufferedReader bf ;
+		String line;
+		StringBuilder res = new StringBuilder();
+		if (status > 299)
+		{
+			bf = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			while ((line = bf.readLine()) != null)
+			{
+				res.append(line);
+				res.append('\n');
+			}
+				bf.close();
+				throw new IllegalArgumentException(res.toString());
+		} else
+		{
+			bf = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			while((line = bf.readLine()) != null)
+			{
+				res.append(line);
+				res.append("\n");
+			}
+			bf.close();
+		}
+		con.disconnect();
+		return res.toString();
 	}
 	
 	 private String getUniqueFileName(String oldFileName)

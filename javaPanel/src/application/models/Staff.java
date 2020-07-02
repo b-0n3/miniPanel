@@ -2,18 +2,19 @@ package application.models;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONObject;
 
 public class Staff {
-	public static final String APILINK="http://9fece465bd26.ngrok.io/api";
+	public static final String APILINK="http://7f1742c0a9ce.ngrok.io/api";
 	private String Name,email;
 	private int level;
 	private int id;
 	private File image;
 	private Token token;
 	private String facebookLink , linkinLink, gPlusLink,twitterLink;
-	private static ArrayList<Categery> categerys;
+	public static List<Categery> categerys;
 	
 	public int getId() {
 		return id;
@@ -23,14 +24,9 @@ public class Staff {
 		this.id = id;
 	}
 
-	public static ArrayList<Categery> getCategerys() {
-		return categerys;
-	}
+	
 
-	public static void setCategerys(ArrayList<Categery> categerys) {
-		Staff.categerys = categerys;
-	}
-
+	
 	public Staff(String name, String email,int id, int level, Token token) {
 		
 		Name = name;
@@ -149,7 +145,7 @@ public class Staff {
 //"facebook":"http:\/\/www.facebook.com\/","instagram":"http:\/\/www.instagram.com\/",
 //"linkedin":"http:\/\/www.linkedin.com\/","google":"http:\/\/plus.google.com\/"}
 	apiReq api = new apiReq(jso.getString("image_profile"));
-	System.out.println(jso.getString("image_profile"));
+	
 	String path = api.send("GET", true);
 		File image = new File(path);
 Staff stf = new Staff(jso.getString("name"),

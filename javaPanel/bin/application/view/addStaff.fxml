@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="499.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="499.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" 
+xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.addStaffController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="273.0" spacing="20.0">
          <children>
