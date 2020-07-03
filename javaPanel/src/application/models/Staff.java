@@ -2,18 +2,20 @@ package application.models;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.json.JSONObject;
 
 public class Staff {
-	public static final String APILINK="http://7f1742c0a9ce.ngrok.io/api";
+	public static final String APILINK="http://66b06c9c98c4.ngrok.io/api";
 	private String Name,email;
 	private int level;
 	private int id;
 	private File image;
 	private Token token;
 	private String facebookLink , linkinLink, gPlusLink,twitterLink;
+	private String password;
 	public static List<Categery> categerys;
 	
 	public int getId() {
@@ -71,7 +73,10 @@ public class Staff {
 	
 	  
 	
-
+public void setPassword(String pass)
+{
+	this.password = pass;
+	}
 	public void handleCookie()
 	{
 		
@@ -125,7 +130,7 @@ public class Staff {
 	}
 
 	public void setEmail(String email) {
-		if (email.matches(""))
+		//if (email.matches(""))
 		this.email = email;
 	}
 
@@ -168,6 +173,11 @@ Staff stf = new Staff(jso.getString("name"),
 
 	public void setToken(Token token) {
 		this.token = token;
+	}
+
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.password;
 	}
 	
 }

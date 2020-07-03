@@ -1,5 +1,7 @@
 package application;
 	
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -26,6 +28,21 @@ public class Main extends Application{
 		
 	}
 	
+	
+	@Override
+	public void stop() throws Exception {
+		File[] cache = (new File("./src/images/")).listFiles();
+		
+		for(File s:cache)
+		{
+			s.delete();
+		}
+		super.stop();
+		
+	}
+	
+
+
 	public static void main(String[] args) {
 		launch(args);
 	}

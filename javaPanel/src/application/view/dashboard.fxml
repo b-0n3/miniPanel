@@ -18,7 +18,7 @@
             <Button fx:id="editArticle" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="edit article " />
             <Button fx:id="addStaff" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="add staff" />
             <Button fx:id="Comments" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Comments" />
-            <Button fx:id="addCategery" mnemonicParsing="false" text="Add Categery" />
+            <Button fx:id="editProfilr" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" text="edit Profile" />
             <Button fx:id="logOut" mnemonicParsing="false" text="Log out" />
          </children>
          <opaqueInsets>

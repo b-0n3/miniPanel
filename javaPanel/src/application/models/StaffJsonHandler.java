@@ -12,22 +12,19 @@ import org.json.JSONObject;
 import com.sun.media.sound.JavaSoundAudioClip;
 
 public class StaffJsonHandler<T> extends JsonHandler<T> {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override 
 	public String build(List<T> elemt) {
-		/*
-		 * apiReq api = new apiReq(jso.getString("image_profile"));
 	
-	String path = api.send("GET", true);
-		File image = new File(path);
-Staff stf = new Staff(jso.getString("name"),
-		jso.getString("email"),
-		jso.getInt("id"),
-		jso.getInt("user_level"),
-		image,
-		jso.getString("facebook"),
-		jso.getString("linkedin"),
-		jso.getString("google"),
-		jso.getString("twitter"));*/
 		 String req = "";
 		 
 		 JSONArray jsa = new JSONArray();
@@ -39,6 +36,7 @@ Staff stf = new Staff(jso.getString("name"),
 			jso.put("email", staff.getEmail());
 			jso.put("id", staff.getId());
 			jso.put("user_level",staff.getLevel());
+			jso.put("password", staff.getPassword());
 			try {
 				jso.put("img", Post.getImageJson(staff.getImage())).toString();
 			} catch (JSONException | IOException e) {
@@ -51,7 +49,7 @@ Staff stf = new Staff(jso.getString("name"),
 			jso.put("google", staff.getgPlusLink());
 			jsa.put(jso);
 		 });
-		 return jsa.toString();
+		 return jsa.get(0).toString();
 	 }
 	 @Override
 	 public List<T> parse(String res) {

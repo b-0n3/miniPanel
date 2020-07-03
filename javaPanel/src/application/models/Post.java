@@ -122,13 +122,19 @@ public class Post {
 
 
 	public static Post fromJsonObject(JSONObject ar) {
-		apiReq api = new apiReq(ar.getString("image"));
+		String path ;
+		if(ar.has("image"))
+		{
+			apiReq api = new apiReq(ar.getString("image"));
 		
-		String path = api.send("GET", true);
-			File image = new File(path);
-		
+		path = api.send("GET", true);
+			
+		}
+		else
+			path ="./src/defaultImage.png";
+		File image = new File(path);
 		Post p = new Post(ar.getString("title"),
-				ar.getString("content"),
+				ar.getString("content"),ar.getInt("id"),
 				Categery.fromId(ar.getInt("category_id")),
 				getTags(ar.getString("tags")),
 				ar.getInt("user_id"),
@@ -148,11 +154,12 @@ public class Post {
 
 	public static JSONObject getImageJson(File image2) throws IOException {
 		JSONObject jso = new JSONObject();
-		jso.put("image_name", image2.getName());
+		jso.put("name", image2.getName());
 
-		byte[] img = Files.readAllBytes(image2.toPath());
-		String image = Crypto.toString(img);
-		jso.put("image", image);
+		//byte[] img = Files.readAllBytes(image2.toPath());
+		String image = Crypto.encodImage(image2.toPath().toString());
+		jso.put("content", image);
+		System.out.println(jso);
 		return jso;
 	}
 	

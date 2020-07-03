@@ -4,11 +4,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import org.json.JSONObject;
 
 import application.models.ControllerClass;
 import application.models.Post;
 import application.models.SceneChanger;
 import application.models.Staff;
+import application.models.StaffJsonHandler;
+import application.models.apiReq;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventDispatchChain;
@@ -35,8 +40,7 @@ public class addStaffController implements ControllerClass{
 	@FXML
     private TextField firstName;
 
-    @FXML
-    private TextField LastName;
+  
 
     @FXML
     private TextField email;
@@ -75,9 +79,10 @@ public class addStaffController implements ControllerClass{
     private Button save;
     private File staffimg;
     private Staff staff;
+    boolean isUpdating = false;
     @Override
    	public void preloadData(Staff staff) {
-   		this.preloadData(staff, new Staff("new user", "email", -404, 1, new File("defaultImage.png"),
+   		this.preloadData(staff, new Staff("new user", "email", -404, 1, new File("./src/defaultImage.png"),
    				"www.facebook.com", "www.linkedin.com", "www.google.com", "www.twitter.com"));
    	}
 
@@ -87,37 +92,99 @@ public class addStaffController implements ControllerClass{
    	}
    	@Override
    	public void preloadData(Staff staff, Staff toEdit) {
+   		
    		this.staff = staff;
+   		//staff.setId(0);
    		staffimg = toEdit.getImage();
-   		if (staff.getId() == 0 || staff.getId() == toEdit.getId())
+   		if (staff.getEmail().equals(toEdit.getEmail()))
+   			isUpdating = true;
+   		if (staff.getLevel() == 0 || staff.getId() == toEdit.getId())
    		{
+   			
+   			
+   			firstName.setText(toEdit.getName());
+   			email.setText(toEdit.getEmail());
+   			confirmEmail.setText(toEdit.getEmail());
+   			facebook.setText(toEdit.getFacebookLink());
+   			twitter.setText(toEdit.getTwitterLink());
+   			linkedIn.setText(toEdit.getLinkinLink());
+   			google.setText(toEdit.getgPlusLink());
+   			
+   			setStaffImg(toEdit.getImage());
+   			if (isUpdating)
+   				isAdmin.setDisable(true);
    			save.setOnAction(event->{
+   				save.setDisable(true);
    				if((email.getText().length() != 0 && confirmEmail.getText().length() != 0))
    				{
    					if(!email.getText().equals(confirmEmail.getText()))
    					{
-   						showError("email do not match!", event);
-   	   					return;
+   						showError("email do not match!", "Error");
+   	   			
+   						return;
    					}
    				}else
    				{
-   					showError("you can't set an empty email!", event);
+   					showError("you can't set an empty email!", "Error");
    					return;
    				}
    				if((PassField.getText().length() >= 8 && confirmPass.getText().length() >= 8))
    				{
    					if(!PassField.getText().equals(confirmPass.getText()))
    					{
-   						showError("password do not match!", event);
+   						showError("password do not match!", "Error");
    	   					return;
    					}
    				}else
    				{
-   					showError("password must contain at least 8 Characters or numbers!", event);
+   					showError("password must contain at least 8 Characters or numbers!", "Error");
    					return;
    				}
+   				if(firstName.getText().length() == 0 )
+   				{
+   					showError("you must set your name!", "Error !");
+   					return ;
+   				}
+   				int level = isAdmin.isSelected() ? 0:1;
+   			Staff stf = new Staff(firstName.getText() , email.getText()
+   						, toEdit.getId(), 
+   						level, staffimg, null, facebook.getText()
+   						, linkedIn.getText(),
+   						google.getText(), twitter.getText());
+   			ArrayList<Staff> staffs = new ArrayList<>();
+   			stf.setPassword(PassField.getText());
+   			staffs.add(stf);
+   				StaffJsonHandler<Staff > stj = new StaffJsonHandler<>();
+   				String request =stj.build(staffs);
+   				apiReq api = new apiReq(Staff.APILINK + "/user/adduser");
+   				staff.getToken().addAuthorization(api);
+   					
+   				api.addPostParam("",request, true);
+   				String responce = api.send("POST",false);
+   				JSONObject resJson = new JSONObject(responce);
+   				if (resJson.has("error"))
+   				{
+   					showError("there was an error try later!", "Error !");
+   					return;
+   				}
+   			
+   				if (isUpdating)
+   				{
+   					showError("profile updated  !", "Message <0_0>");
+   					ControllerClass db = new dashboardController();
+   					SceneChanger sn = new SceneChanger();
+   					try {
+   						sn.changeScenes(event, "/application/view/addStaff.fxml", "add User", toEdit,null, db);
+   					} catch (Exception e1) {
+   						// TODO Auto-generated catch block
+   						e1.printStackTrace();
+   					}
+   				}else
+   				{
+   					showError("staff added !", "Message <0_0>");
+   					returntoDashboard();
    				
-   				
+   				}
    				});
    			Cancel.setOnAction(event->{
    				returntoDashboard();
@@ -128,7 +195,7 @@ public class addStaffController implements ControllerClass{
    			else
    				isAdmin.setSelected(false);
    			staffImage.setOnMouseEntered(event->{
-   				File uploadImg = new File("uploadimage.png");
+   				File uploadImg = new File("./src/uploadimage.png");
    				setStaffImg(uploadImg);
    			});
    			
@@ -144,12 +211,12 @@ public class addStaffController implements ControllerClass{
    					setStaffImg(staffimg);
    				}else
    				showError("you must select an image",
-   							event);
+   							"Error");
    			});
    		}else
    		{
    			SceneChanger.showPopUP("you are not authorized to this page !",
-   					(Stage)this.Cancel.getScene().getWindow());
+   					"Error !");
    			returntoDashboard();
    			
    		
@@ -196,9 +263,11 @@ public class addStaffController implements ControllerClass{
 		
 		return selectedFile;
 	}
-	public void showError(String str , Event event) {
-		SceneChanger.showPopUP(str,(Stage) ((Parent)((Node)event.getSource()).getParent()).getScene().getWindow());
-			return;
+	public void showError(String str , String type) {
+		SceneChanger.showPopUP(str,type);
+			
+		
+			
 	}
 	
 	

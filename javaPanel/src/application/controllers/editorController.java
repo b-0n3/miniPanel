@@ -11,6 +11,7 @@ import java.util.Hashtable;
 import javax.swing.border.TitledBorder;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 
@@ -116,7 +117,7 @@ public class editorController implements ControllerClass {
 	public void preloadData(Staff staff) {
     	this.staff = staff;
     	
-    	this.preloadData(this.staff,new Post("new post","<b> hello world</>",-404,null,this.staff.getId(),null));;
+    	this.preloadData(this.staff,new Post("new post","<b> hello world</b>",-404,null,null,this.staff.getId(),null));;
     }
     public void setPostImg(File img)
     {
@@ -132,19 +133,20 @@ public class editorController implements ControllerClass {
 
 	@Override
 	public void preloadData(Staff staff, Post post) {
+		this.staff = staff;
 		imageChanged = false;
 		if(post.getImage() != null)
 			postImage = post.getImage();
 		else
 		{
-			postImage = new File("defaultImage.png");
+			postImage = new File("./src/defaultImage.png");
 			imageChanged = true;
 		}
 		
 		setPostImg(postImage);
 		
 		postImg.setOnMouseEntered(event->{
-			File uploadImg = new File("uploadimage.png");
+			File uploadImg = new File("./src/uploadimage.png");
 			setPostImg(uploadImg);
 		});
 		
@@ -160,15 +162,16 @@ public class editorController implements ControllerClass {
 				setPostImg(postImage);
 				imageChanged = true;
 			}else
-				errorText.setText("you must select an image");
+				SceneChanger.showPopUP("you must select an image !","Error !");
 		});
 		SaveCategery.setOnAction(event->{
 			if (CategeryName.getText().length() > 0)
 			{
-				apiReq api  = new apiReq(Staff.APILINK + "/category/addcategory");
+				apiReq api  = new apiReq(Staff.APILINK + "/categories/addcategory");
 				staff.getToken().addAuthorization(api);
-				api.addProperty("category_name", CategeryName.getText());
-				String responce = api.send("GET", false);
+				api.addPostParam("category_name", CategeryName.getText(),false);
+				
+				String responce = api.send("POST", false);
 				JSONObject jso = new JSONObject(responce);
 				if(!jso.has("error"))
 				{
@@ -176,15 +179,23 @@ public class editorController implements ControllerClass {
 					CategeryBox.getItems().add(CategeryName.getText());
 					CategeryBox.setValue(CategeryName.getText());
 				}else
-					errorText.setText("you are not Authorized to add Category");
-			}
-			errorText.setText("you can not set an empty category !");
+				SceneChanger.showPopUP("you are not Authorized to add Category !","Error !");
+			}else	
+			SceneChanger.showPopUP("you can not set an empty category !","Error !");
 			
 		});
 		Tcancel.setOnAction(event->{
 			ReturnToDashboard(event);
 		});
 			TSave.setOnAction(event->{
+				System.out.println(HtmlEditor.getHtmlText());
+				String[] htmltext = HtmlEditor.getHtmlText().split("contenteditable=\"true\"");
+				StringBuilder str  = new StringBuilder();
+				for (String htm : htmltext)
+				{
+					str.append(htm);
+				}
+				
 			Platform.runLater(new Runnable() {
 				
 				@Override
@@ -200,44 +211,60 @@ public class editorController implements ControllerClass {
 						tags.append(",");
 					});
 					
-					if( !Cat.contains(CategeryBox.getValue()))
+//					if( !Cat.contains(CategeryBox.getValue()))
+//					{
+//						category  = Categery.newCategery(CategeryBox.getValue(), staff.getToken());
+//					}
+//					else
+					if (CategeryBox.getValue() == null )
 					{
-						category  = Categery.newCategery(CategeryBox.getValue(), staff.getToken());
+						SceneChanger.showPopUP("you must choose a category !","Error !");
+						return;
 					}
-					else
 						category = Categery.fromId(Cat.get(CategeryBox.getValue()));
 					Post ps;
-					if(post.getImage() == null)
-					ps = new Post(Postname.getText(), htmlField.getText(),
-						category	,Post.getTags(tags.toString()), staff.getId(),postImage);
-					else
-						ps = new Post(Postname.getText(), htmlField.getText(),
+//					if(post.getImage() == null)
+//					ps = new Post(Postname.getText(), htmlField.getText(),
+//						category	,Post.getTags(tags.toString()), staff.getId(),postImage);
+//					else
+					
+						ps = new Post(Postname.getText(),str.toString(),
 								post.getId(),category	,Post.getTags(tags.toString()), staff.getId(),postImage);
+					
 					PostJsonHandler<Post> pjs = new PostJsonHandler<>();
 					ArrayList<Post> posts = new ArrayList<>();
 					posts.add(ps);
-				 String jso =pjs.build(posts);
-				
-				 apiReq api = new apiReq(Staff.APILINK + "/post/addPost");
+				 String jso = null;
+				try {
+					jso = pjs.build(posts);
+				} catch (JSONException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 System.out.println(jso);
+				 apiReq api = new apiReq(Staff.APILINK + "/post/addpost");
 				 staff.getToken().addAuthorization(api);
 				 api.addPostParam("", jso, true);
 				 String responce = api.send("POST", false);
+				 System.out.println(responce);
 				 JSONObject ob = new JSONObject(responce);
 				 	
 				 if(ob.has("error"))
 				 	{
-				 		errorText.setText("you are not authorized to add posts");
+				 		
+				 		SceneChanger.showPopUP("you are not authorized to add posts !","Error !");
 				 	}
 				 	else
-				 		errorText.setText("Post saved");
-				 
+				 		SceneChanger.showPopUP("post added "," Message (0_0)");
 				 	
 						ReturnToDashboard(event);
 				
 				 	
 				 	}
 			});
+			HtmlEditor.setDisable(false);
 		});
+			
 		if (CategeryBox.getItems().isEmpty())
 			Staff.categerys.forEach(c->{
 				
@@ -250,7 +277,7 @@ public class editorController implements ControllerClass {
 		
 		Postname.setText(post.getTitle());
 		errorText.setText("");
-		
+		if(post.getTags() != null)
 		post.getTags().forEach(t->{
 			TagsBox.getItems().add(t);
 		});
@@ -291,15 +318,16 @@ public class editorController implements ControllerClass {
     			JSONObject imageJson = Post.getImageJson(selectedFile);
     				api.addPostParam("", imageJson.toString(), true);
     			String responce = api.send("POST", false);
-    			
+    			SceneChanger.showPopUP("uploading image " ,"Message <0_0>");
     			JSONObject jso = new JSONObject(responce);
-    	
+    			
     			if(!jso.has("error"))
     			{
     				String htmltext = "</br><img src='"+(jso.getString("url") ) + "'></img> </br>";
         			HtmlEditor.setHtmlText(HtmlEditor.getHtmlText() + htmltext);
     			}else
-    				errorText.setText("you are not Authorized to add images");
+    				SceneChanger.showPopUP("you are not Authorized to add images" ,"Error !");
+    			
     			
     	
     		} catch (Exception e) {
@@ -317,7 +345,7 @@ public class editorController implements ControllerClass {
     			HtmlEditor.setHtmlText(HtmlEditor.getHtmlText() + htmltext);
 			}
 			else
-				errorText.setText("you must add a link");
+				SceneChanger.showPopUP("you must add Image link !" ,"Error !");
 		});
 		addTag.setOnAction(event->{
 			if (tagsFiled.getText().length() != 0)
@@ -326,7 +354,7 @@ public class editorController implements ControllerClass {
 				TagsBox.getItems().add(tagsFiled.getText());
 				TagsBox.setValue(tagsFiled.getText());
 			}else 
-				errorText.setText("you can't set an empty tag");
+				SceneChanger.showPopUP("you can't add an empty tag!" ,"Error");
 		});
 		
 		
@@ -355,10 +383,10 @@ public class editorController implements ControllerClass {
 		ControllerClass db = new dashboardController();
 		SceneChanger sn = new SceneChanger();
 		try {
-			sn.changeScenes(event, "/application/view/dashboard.fxml", "Dashboard", staff, db);
+			sn.changeScenes(event, "/application/view/dashboard.fxml", "Dashboard", this.staff, db);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch 
-			e1.printStackTrace();
+			SceneChanger.showPopUP(e1.getMessage(),"Error!" );
 		}
 		
 	}

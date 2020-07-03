@@ -12,8 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<HBox prefHeight="674.0" prefWidth="1156.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1"
- xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.editorController">
+<HBox prefHeight="674.0" prefWidth="1156.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.editorController">
    <children>
       <VBox>
          <children>
@@ -21,7 +20,7 @@
                <children>
                   <Button fx:id="editText" mnemonicParsing="false" text="Visual" />
                   <Button fx:id="editHtml" mnemonicParsing="false" text="Html" />
-                  <TextField fx:id="Postname" prefHeight="26.0" prefWidth="607.0" promptText="title" />
+                  <TextField fx:id="Postname" prefHeight="26.0" prefWidth="572.0" promptText="title" />
                   <Button fx:id="TSave" mnemonicParsing="false" text="save" />
                   <Button fx:id="Tcancel" mnemonicParsing="false" text="Cancel" />
                </children>
