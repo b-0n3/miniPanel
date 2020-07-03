@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class SceneChanger {
@@ -71,4 +73,31 @@ public class SceneChanger {
 		        stage.show();
 			
 		}
+		public void changeScenes(Stage stage, String viewName, String title, Staff staff, ControllerClass controllerClass) throws IOException
+	    {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(getClass().getResource(viewName));
+	        Parent parent = loader.load();
+	        
+	        Scene scene = new Scene(parent);
+	        
+	        //access the controller class and preloaded the volunteer data
+	        controllerClass = loader.getController();
+	        controllerClass.preloadData(staff);
+	        
+	
+	        
+	        stage.setTitle(title);
+	        stage.setScene(scene);
+	        stage.show();
+	    }
+		public static void showPopUP(String str , Stage stage)
+		{
+			Popup pop = new Popup();
+   			Label l = new Label();
+   			l.setText(str);
+   			pop.getContent().add(l);
+   			pop.show(stage.getOwner());
+		}
+
 }

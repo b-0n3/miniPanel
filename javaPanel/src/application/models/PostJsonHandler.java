@@ -1,9 +1,11 @@
 package application.models;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PostJsonHandler<T>  extends JsonHandler<T>{
@@ -18,11 +20,22 @@ public class PostJsonHandler<T>  extends JsonHandler<T>{
 			 JSONArray array = new JSONArray();
 			 for(Post ps :(List<Post>)posts ) {
 			 
-			 all.put("name", ps.getTitle());
+			 all.put("title", ps.getTitle());
 			 all.put("content", ps.getContent());
-			 all.put("user_id", ps.getOwnerid());
-			 all.put("Categery", ps.getCategery());
-			 all.put("id", ps.getId());
+			 String tags = "";
+			 for(String s : ps.getTags())
+				 tags = tags +"," + s ;
+			 all.put("tags", tags);
+			 all.put("category_id", ps.getCategery().getId());
+			 
+			 all.put("post_id", ps.getId());
+			 
+			 try {
+				all.put("img", Post.getImageJson(ps.getImage()));
+			} catch (JSONException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			// all.put("image", ps.getImage().getName());
 			 
 			

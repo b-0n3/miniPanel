@@ -1,7 +1,10 @@
 package application.models;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -140,6 +143,17 @@ public class Post {
 				array.add(as);
 	
 		return array;
+	}
+
+
+	public static JSONObject getImageJson(File image2) throws IOException {
+		JSONObject jso = new JSONObject();
+		jso.put("image_name", image2.getName());
+
+		byte[] img = Files.readAllBytes(image2.toPath());
+		String image = Crypto.toString(img);
+		jso.put("image", image);
+		return jso;
 	}
 	
 }

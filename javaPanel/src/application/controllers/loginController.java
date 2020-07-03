@@ -60,6 +60,7 @@ Platform.runLater(new Runnable() {
     					token = Token.fromJsonObject(new JSONObject(res));
     					api.reConnect(Staff.APILINK+"/auth/me?token="+
     					token.getToken());
+    					
     					staff = Staff.fromJsonObject(new JSONObject(api.send("POST", false)));
     					staff.setToken(token);
     					getCategerys(staff);

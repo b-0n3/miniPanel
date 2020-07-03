@@ -1,4 +1,71 @@
-http://9fece465bd26.ngrok.io/api/auth/login
+POST /api/post/addPost
+[
+{
+	"title":"",
+	"category_id":id,
+	"content": content
+	,"tags" : "tag1 , tags2"
+	, "post_id" : ila kan -404 rah new post
+	"img":{
+		"image_name":name
+		,"image":base64 image
+		}
 
-email + password
+}
+]
+responce "likan lmohim jsonObject"
+GET /api//category/addcategory
+"category_name: " name 
+responce 
+	{ "id": the new Category id
+	}
+
+POST /images/addimage
+{
+		"image_name":name
+		,"image":base64 image
+		}
+
+responce {"url": url}
+
+
+
+POST /api/user/adduser
+[
+{
+	"name":"",
+	"id":id ila kan -404 rah jdid,
+	"user_level": 0 admin 1 user 3adi
+	,"email" : 
+	,"img":{
+		"image_name":name
+		,"image":base64 image
+	}
+	,"facebook":
+	,"twitter":
+	,"linkedin":
+	,"google":
+
+}
+]
+responce likan
+GET /api/user/users
+
+responce 
+[
+{
+	"name":"",
+	"id":id ila kan -404 rah jdid,
+	"user_level": 0 admin 1 user 3adi
+	,"email" : 
+	,"image_profile": link to image
+	,"facebook":
+	,"twitter":
+	,"linkedin":
+	,"google":
+
+},
+]
+
+
 

@@ -7,28 +7,34 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<HBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="499.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" 
-xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.addStaffController">
+<HBox alignment="TOP_CENTER" prefHeight="427.0" prefWidth="556.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.addStaffController">
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="273.0" spacing="20.0">
+      <VBox alignment="CENTER" prefHeight="427.0" prefWidth="302.0" spacing="20.0">
          <children>
-            <TextField promptText="username" />
-            <TextField promptText="firstname" />
-            <TextField promptText="lastname" />
-            <TextField promptText="email" />
-            <TextField promptText="confirm email" />
-            <TextField fx:id="nField" promptText="PhoneNumber" />
+            <TextField fx:id="firstName" promptText="firstname" />
+            <TextField fx:id="LastName" promptText="lastname" />
+            <TextField fx:id="email" promptText="email" />
+            <TextField fx:id="confirmEmail" promptText="confirm email" />
+            <TextField fx:id="facebook" promptText="facebook *" />
+            <TextField fx:id="linkedIn" promptText="linkedin *" />
+            <TextField fx:id="google" promptText="google+ *" />
+            <TextField fx:id="twitter" promptText="twitter *" />
          </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
       </VBox>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="275.0" spacing="20.0">
+      <VBox alignment="CENTER" prefHeight="427.0" prefWidth="275.0" spacing="20.0">
          <children>
+            <Circle fx:id="staffImage" fill="DODGERBLUE" radius="81.0" stroke="BLACK" strokeType="INSIDE" />
             <PasswordField fx:id="PassField" prefHeight="29.0" prefWidth="246.0" promptText="password" />
-            <PasswordField prefHeight="31.0" prefWidth="246.0" promptText="confirm password" />
-            <HBox alignment="CENTER_LEFT" prefHeight="69.0" prefWidth="246.0">
+            <PasswordField fx:id="confirmPass" promptText="confirm password" />
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="246.0">
                <children>
-                  <CheckBox mnemonicParsing="false" text="is Admin" />
+                  <CheckBox fx:id="isAdmin" mnemonicParsing="false" text="is Admin" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -37,16 +43,19 @@ xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.addSt
                   <Insets left="32.0" />
                </padding>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="243.0" />
-            <HBox prefHeight="53.0" prefWidth="246.0" spacing="100.0">
+            <HBox alignment="CENTER" prefHeight="35.0" prefWidth="246.0" spacing="100.0">
                <children>
-                  <Button mnemonicParsing="false" text="cancel" />
-                  <Button mnemonicParsing="false" text="save" />
+                  <Button fx:id="Cancel" mnemonicParsing="false" text="cancel" />
+                  <Button fx:id="save" mnemonicParsing="false" text="save" />
                </children>
             </HBox>
+            <Text opacity="0.45" strokeType="OUTSIDE" strokeWidth="0.0" text="* : optional" textAlignment="CENTER" wrappingWidth="235.830078125" />
          </children>
+         <opaqueInsets>
+            <Insets left="10.0" />
+         </opaqueInsets>
          <padding>
-            <Insets top="92.0" />
+            <Insets left="10.0" right="10.0" />
          </padding>
       </VBox>
    </children>

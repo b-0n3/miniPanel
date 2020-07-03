@@ -116,7 +116,7 @@ public class editorController implements ControllerClass {
 	public void preloadData(Staff staff) {
     	this.staff = staff;
     	
-    	this.preloadData(this.staff,new Post("new post","<b> hello world</>",null,null,this.staff.getId(),null));;
+    	this.preloadData(this.staff,new Post("new post","<b> hello world</>",-404,null,this.staff.getId(),null));;
     }
     public void setPostImg(File img)
     {
@@ -133,7 +133,7 @@ public class editorController implements ControllerClass {
 	@Override
 	public void preloadData(Staff staff, Post post) {
 		imageChanged = false;
-		if(post.getImage()!= null)
+		if(post.getImage() != null)
 			postImage = post.getImage();
 		else
 		{
@@ -231,18 +231,10 @@ public class editorController implements ControllerClass {
 				 	else
 				 		errorText.setText("Post saved");
 				 
-				 	if(imageChanged) {
-				 	api.reConnect("/post/addPost/postImage");
-				 	staff.getToken().addAuthorization(api);
-				 	try {
-						api.sendImage(postImage, post.getId());
+				 	
 						ReturnToDashboard(event);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						errorText.setText("error :" + e1.getMessage());
-						e1.printStackTrace();
-					}
-				 	}
+				
+				 	
 				 	}
 			});
 		});
@@ -296,7 +288,9 @@ public class editorController implements ControllerClass {
     			
     
     			staff.getToken().addAuthorization(api);
-    			String responce = api.sendImage(selectedFile, -404);
+    			JSONObject imageJson = Post.getImageJson(selectedFile);
+    				api.addPostParam("", imageJson.toString(), true);
+    			String responce = api.send("POST", false);
     			
     			JSONObject jso = new JSONObject(responce);
     	

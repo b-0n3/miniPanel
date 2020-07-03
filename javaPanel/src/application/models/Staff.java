@@ -139,11 +139,6 @@ public class Staff {
 	}
 
 	public static Staff fromJsonObject(JSONObject jso) {
-//{"id":1,"name":"JOHN DEO","email":"admin@root.com","email_verified_at":"2020-06-24 00:00:00",
-//"created_at":"2020-06-26 00:00:00","updated_at":"2020-06-26 00:00:00","user_level":1,		
-//"image_profile":"https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/7\/7e\/Circle-icons-profile.svg\/1024px-Circle-icons-profile.svg.png",
-//"facebook":"http:\/\/www.facebook.com\/","instagram":"http:\/\/www.instagram.com\/",
-//"linkedin":"http:\/\/www.linkedin.com\/","google":"http:\/\/plus.google.com\/"}
 	apiReq api = new apiReq(jso.getString("image_profile"));
 	
 	String path = api.send("GET", true);
@@ -156,7 +151,7 @@ Staff stf = new Staff(jso.getString("name"),
 		jso.getString("facebook"),
 		jso.getString("linkedin"),
 		jso.getString("google"),
-		jso.getString("twitter"));		
+		jso.getString("twitter"));
 		return stf;
 	}
 
