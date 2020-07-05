@@ -15,7 +15,6 @@
       <VBox alignment="CENTER" prefHeight="427.0" prefWidth="302.0" spacing="20.0">
          <children>
             <TextField fx:id="firstName" promptText="firstname" />
-            <TextField fx:id="LastName" promptText="lastname" />
             <TextField fx:id="email" promptText="email" />
             <TextField fx:id="confirmEmail" promptText="confirm email" />
             <TextField fx:id="facebook" promptText="facebook *" />

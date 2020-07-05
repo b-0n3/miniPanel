@@ -2,12 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.dashboardController">
+<HBox maxHeight="484.0" maxWidth="823.0" minHeight="484.0" minWidth="823.0" prefHeight="484.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.dashboardController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="484.0" prefWidth="246.0" spacing="13.0">
          <children>
@@ -31,6 +32,10 @@
             <Insets top="40.0" />
          </padding>
       </VBox>
-      <VBox fx:id="infBox" alignment="TOP_CENTER" prefHeight="484.0" prefWidth="594.0" />
+      <ScrollPane prefHeight="484.0" prefWidth="649.0" vvalue="1.0">
+         <content>
+            <VBox fx:id="infBox" alignment="TOP_CENTER" prefHeight="484.0" prefWidth="594.0" />
+         </content>
+      </ScrollPane>
    </children>
 </HBox>

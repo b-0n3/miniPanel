@@ -30,6 +30,7 @@ public class SceneChanger {
 	        
 	        stage.setTitle(title);
 	        stage.setScene(scene);
+	        stage.setResizable(false);
 	        stage.show();
 	    
 	}
@@ -50,7 +51,9 @@ public class SceneChanger {
 	        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	        
 	        stage.setTitle(title);
+	        
 	        stage.setScene(scene);
+	        stage.setResizable(false);
 	        stage.show();
 	    }
 
@@ -71,6 +74,7 @@ public class SceneChanger {
 		        
 		        stage.setTitle(string2);
 		        stage.setScene(scene);
+		        stage.setResizable(false);
 		        stage.show();
 			
 		}
@@ -92,6 +96,7 @@ public class SceneChanger {
 		        
 		        stage.setTitle(string2);
 		        stage.setScene(scene);
+		        stage.setResizable(false);
 		        stage.show();
 			
 		}
@@ -111,6 +116,7 @@ public class SceneChanger {
 	        
 	        stage.setTitle(title);
 	        stage.setScene(scene);
+	        stage.setResizable(false);
 	        stage.show();
 	    }
 		public static void showPopUP(String str, String title)

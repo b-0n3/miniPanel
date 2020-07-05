@@ -16,9 +16,31 @@ public class Post {
 	private ArrayList<String> tags;
 	private int ownerid;
 	private File image;
+	private String imageurl;
+	private String imagename;
 	
 
 	
+	public String getImagename() {
+		return imagename;
+	}
+
+
+	public void setImagename(String imagename) {
+		this.imagename = imagename;
+	}
+
+
+	public String getImageurl() {
+		return imageurl;
+	}
+
+
+	public void setImageurl(String imageurl) {
+		this.imageurl = imageurl;
+	}
+
+
 	public Post(String title, String content, Categery categery, ArrayList<String> tags, int ownerid, File image) {
 		super();
 		this.title = title;
@@ -122,23 +144,29 @@ public class Post {
 
 
 	public static Post fromJsonObject(JSONObject ar) {
-		String path ;
+		
+		String url = null;
+		String imagename=null;
+		File image;
+		System.out.println(ar);
 		if(ar.has("image"))
 		{
-			apiReq api = new apiReq(ar.getString("image"));
-		
-		path = api.send("GET", true);
-			
+			url = ar.getString("image");
+			image = null;
+		//	imagename = ar.getString("");
 		}
 		else
-			path ="./src/defaultImage.png";
-		File image = new File(path);
+		image = new File("./src/defaultImage.png");
+			
+		 
 		Post p = new Post(ar.getString("title"),
 				ar.getString("content"),ar.getInt("id"),
 				Categery.fromId(ar.getInt("category_id")),
 				getTags(ar.getString("tags")),
 				ar.getInt("user_id"),
 				image);
+		p.setImageurl(url);
+		//p.setImagename(imagename);
 		return p;
 	}
 	public static ArrayList<String> getTags(String a )
@@ -159,7 +187,7 @@ public class Post {
 		//byte[] img = Files.readAllBytes(image2.toPath());
 		String image = Crypto.encodImage(image2.toPath().toString());
 		jso.put("content", image);
-		System.out.println(jso);
+		//System.out.println(jso);
 		return jso;
 	}
 	

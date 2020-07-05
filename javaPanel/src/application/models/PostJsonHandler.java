@@ -1,5 +1,6 @@
 package application.models;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,24 @@ public class PostJsonHandler<T>  extends JsonHandler<T>{
 		 });
 		 
 		 return Posts;
+	 }
+	 
+	 public void setPostImage(Post post,String url)
+	 {
+		 String path;
+		 if(post.getImage() == null)
+		 {
+			 try {
+				 apiReq api = new apiReq(url);
+			
+				 path = api.send("GET", true);
+				 post.setImage(new File(path));
+		 }
+			 catch(Exception e)
+			 {
+				 post.setImage(new File("./src/defaultImage.png"));
+			 }
+		 }
 	 }
 
 }

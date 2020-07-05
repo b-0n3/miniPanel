@@ -40,7 +40,7 @@ public class loginController {
     @FXML
     public void initialize() {
     	userField.setText("admin@root.com");
-    	passField.setText("123456");
+    	passField.setText("123456789");
     	login.setOnAction(event->{
     			
 Platform.runLater(new Runnable() {
@@ -49,15 +49,40 @@ Platform.runLater(new Runnable() {
     	login.setDisable(true);
     	login.setVisible(false);
     	errorField.setText("");
+    	errorField.setText("");
     			try {
-    				Token token;
+    				Token token =null;
     				Staff staff;
-    			
-    					apiReq api = new apiReq(Staff.APILINK+"/auth/login/");
+    				apiReq api = null;
+    				String res = null;
+    			try {
+    					 api = new apiReq(Staff.APILINK+"/auth/login/");
     					api.addPostParam("email",userField.getText() , false);
     					api.addPostParam("password",passField.getText() , false);
-    					String res = api.send("POST", false);
-    					token = Token.fromJsonObject(new JSONObject(res));
+    					res = api.send("POST", false);
+    					if(res.contains("error"))
+    					{passField.setText("");
+    						System.out.println("eedsfdsfdsee");
+    						errorField.setText("invalid email or Password");
+        					login.setDisable(false);	
+                			login.setVisible(true);
+            				return;
+    					}
+    					
+    			}catch(Exception e)
+    			{
+    				
+    				System.out.println("eeee");
+    					errorField.setText("invalid email or Password");
+    					login.setDisable(false);	
+            			login.setVisible(true);
+            			passField.setText("");
+        				return;
+    				
+    				
+    			
+    			}
+    			token = Token.fromJsonObject(new JSONObject(res));
     					api.reConnect(Staff.APILINK+"/auth/me?token="+
     					token.getToken());
     					
@@ -69,18 +94,11 @@ Platform.runLater(new Runnable() {
     					sn.changeScenes(event, "/application/view/dashboard.fxml", "Dashboard", staff, db);
     					//System.out.println(staff);
     					//	accesToken = (String)
-    			}catch(IllegalArgumentException e)
+    			}catch(Exception ex)
     			{
-    					if (e.getMessage().equals(""))
-    						errorField.setText("incorrect email or password");
-    					else
-    						errorField.setText(e.getMessage());
-    				e.printStackTrace();
-    			}
-    			catch(Exception ex)
-    			{
-    				errorField.setText("Host is down or connection problem \n "
-    						+ "cause : <" + ex.getMessage() + ">");
+    				
+    				passField.setText("");
+    				errorField.setText("Host is down or connection problem \n ");
     				ex.printStackTrace();
     			}
     			login.setDisable(false);	

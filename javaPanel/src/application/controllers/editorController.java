@@ -146,15 +146,18 @@ public class editorController implements ControllerClass {
 		setPostImg(postImage);
 		
 		postImg.setOnMouseEntered(event->{
+			errorText.setText("");
 			File uploadImg = new File("./src/uploadimage.png");
 			setPostImg(uploadImg);
 		});
 		
 		postImg.setOnMouseExited(event->{
+			errorText.setText("");
 			setPostImg(postImage);
 		});
 		
 		postImg.setOnMouseClicked(event->{
+			errorText.setText("");
 			File selectedImage = chooseImage(event);
 			if (selectedImage != null)
 			{
@@ -165,6 +168,7 @@ public class editorController implements ControllerClass {
 				SceneChanger.showPopUP("you must select an image !","Error !");
 		});
 		SaveCategery.setOnAction(event->{
+			errorText.setText("");
 			if (CategeryName.getText().length() > 0)
 			{
 				apiReq api  = new apiReq(Staff.APILINK + "/categories/addcategory");
@@ -185,6 +189,7 @@ public class editorController implements ControllerClass {
 			
 		});
 		Tcancel.setOnAction(event->{
+			errorText.setText("");
 			ReturnToDashboard(event);
 		});
 			TSave.setOnAction(event->{
@@ -195,6 +200,7 @@ public class editorController implements ControllerClass {
 				{
 					str.append(htm);
 				}
+				errorText.setText("");
 				
 			Platform.runLater(new Runnable() {
 				
@@ -271,6 +277,8 @@ public class editorController implements ControllerClass {
 				CategeryBox.getItems().add(((Categery)c).getContent());
 				Cat.put(((Categery)c).getContent(), ((Categery)c).getId());
 			});
+		if(post.getCategery() != null)
+		CategeryBox.setValue(post.getCategery().getContent());
 			
 		HtmlEditor.setHtmlText(post.getContent());
 		HtmlEditor.applyCss();
@@ -283,6 +291,7 @@ public class editorController implements ControllerClass {
 		});
 		
 		editHtml.setOnAction(event->{
+			errorText.setText("");
 			htmlField.setDisable(false);
 			htmlField.setVisible(true);
 			HtmlEditor.setDisable(true);
@@ -291,6 +300,7 @@ public class editorController implements ControllerClass {
 		});
 		
 		editText.setOnAction(event->{
+			errorText.setText("");
 			htmlField.setDisable(true);
 			htmlField.setVisible(false);
 			HtmlEditor.setDisable(false);
@@ -304,7 +314,7 @@ public class editorController implements ControllerClass {
 		
 		
 		AddLocalImage.setOnAction(event->{
-
+			errorText.setText("");
     		File selectedFile = chooseImage(event);
     		if (selectedFile != null) {
     			
@@ -316,15 +326,22 @@ public class editorController implements ControllerClass {
     
     			staff.getToken().addAuthorization(api);
     			JSONObject imageJson = Post.getImageJson(selectedFile);
-    				api.addPostParam("", imageJson.toString(), true);
-    			String responce = api.send("POST", false);
+    			System.out.println(imageJson);	
+    			api.addPostParam("", imageJson.toString(), true);
+    		
+    				String responce = api.send("POST", false);
     			SceneChanger.showPopUP("uploading image " ,"Message <0_0>");
     			JSONObject jso = new JSONObject(responce);
-    			
+    		
     			if(!jso.has("error"))
     			{
+    				if(jso.has("url")) {
     				String htmltext = "</br><img src='"+(jso.getString("url") ) + "'></img> </br>";
+    				
         			HtmlEditor.setHtmlText(HtmlEditor.getHtmlText() + htmltext);
+    				}
+    				else
+    					SceneChanger.showPopUP("invalid image \n allowed Extention : .png \n .jpg \n .jpeg \n .gif .", "Error !");
     			}else
     				SceneChanger.showPopUP("you are not Authorized to add images" ,"Error !");
     			
@@ -332,10 +349,10 @@ public class editorController implements ControllerClass {
     	
     		} catch (Exception e) {
     			// TODO Auto-generated catch block
-    			errorText.setText(e.getMessage());
+    			SceneChanger.showPopUP("connection Error try later!" ,"Error !");
     		}}
     		else 
-    			throw new IllegalArgumentException("invalid Image");
+    			SceneChanger.showPopUP("you must choose an  image" ,"Error !");
 			
 		});
 		addWebImage.setOnAction(event->{

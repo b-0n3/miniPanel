@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import application.models.Post;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
@@ -28,6 +30,7 @@ public class PostHolder<T> extends DataHolder<T> {
 		box.getChildren().add(this.category);
 		box.setSpacing(5.0);
 		box.setPrefSize(100, 30);
+
 		box.setAlignment(Pos.CENTER_RIGHT);
 	
 		//box.getChildren().add(this.content);
@@ -37,10 +40,10 @@ public class PostHolder<T> extends DataHolder<T> {
 	@Override
 	public void preloadData() {
 		Post post = (Post) super.data;
-		//System.out.println("this si post "+ post);
+		
 		
 		this.category.setText(post.getCategery().getContent());
-		//content.setText(post.getContent());
+		
 		name.setText(post.getTitle());
 		this.setSpacing(100.0);
         this.setAlignment(Pos.CENTER_LEFT);

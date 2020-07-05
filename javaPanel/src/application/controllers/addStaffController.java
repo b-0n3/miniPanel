@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.activation.MimetypesFileTypeMap;
+
 import org.json.JSONObject;
 
 import application.models.ControllerClass;
@@ -96,6 +98,7 @@ public class addStaffController implements ControllerClass{
    		this.staff = staff;
    		//staff.setId(0);
    		staffimg = toEdit.getImage();
+   		//staffimg = new File("./src/defaultImage.png");
    		if (staff.getEmail().equals(toEdit.getEmail()))
    			isUpdating = true;
    		if (staff.getLevel() == 0 || staff.getId() == toEdit.getId())
@@ -120,12 +123,13 @@ public class addStaffController implements ControllerClass{
    					if(!email.getText().equals(confirmEmail.getText()))
    					{
    						showError("email do not match!", "Error");
-   	   			
+   						save.setDisable(false);
    						return;
    					}
    				}else
    				{
    					showError("you can't set an empty email!", "Error");
+   					save.setDisable(false);
    					return;
    				}
    				if((PassField.getText().length() >= 8 && confirmPass.getText().length() >= 8))
@@ -133,16 +137,19 @@ public class addStaffController implements ControllerClass{
    					if(!PassField.getText().equals(confirmPass.getText()))
    					{
    						showError("password do not match!", "Error");
+   						save.setDisable(false);
    	   					return;
    					}
    				}else
    				{
    					showError("password must contain at least 8 Characters or numbers!", "Error");
+   					save.setDisable(false);
    					return;
    				}
    				if(firstName.getText().length() == 0 )
    				{
-   					showError("you must set your name!", "Error !");
+   					showError("you must add your name!", "Error !");
+   					save.setDisable(false);
    					return ;
    				}
    				int level = isAdmin.isSelected() ? 0:1;
@@ -165,18 +172,18 @@ public class addStaffController implements ControllerClass{
    				if (resJson.has("error"))
    				{
    					showError("there was an error try later!", "Error !");
+   					save.setDisable(false);
    					return;
    				}
    			
    				if (isUpdating)
    				{
    					showError("profile updated  !", "Message <0_0>");
-   					ControllerClass db = new dashboardController();
+   					save.setDisable(false);
    					SceneChanger sn = new SceneChanger();
    					try {
-   						sn.changeScenes(event, "/application/view/addStaff.fxml", "add User", toEdit,null, db);
+   						sn.changeScenes(event, "/application/view/login.fxml", "login");
    					} catch (Exception e1) {
-   						// TODO Auto-generated catch block
    						e1.printStackTrace();
    					}
    				}else
@@ -194,7 +201,10 @@ public class addStaffController implements ControllerClass{
    				isAdmin.setSelected(true);
    			else
    				isAdmin.setSelected(false);
+   			
+   			
    			staffImage.setOnMouseEntered(event->{
+   		
    				File uploadImg = new File("./src/uploadimage.png");
    				setStaffImg(uploadImg);
    			});
@@ -225,6 +235,9 @@ public class addStaffController implements ControllerClass{
    	}
 
 	private void setStaffImg(File staffimg2) {
+		String mimetype= new MimetypesFileTypeMap().getContentType(staffimg2);
+        String type = mimetype.split("/")[0];
+        if(type.equals("application") || type.equals("image")){
 		try {
 			Image image = new Image(new FileInputStream(staffimg2));
 
@@ -233,6 +246,17 @@ public class addStaffController implements ControllerClass{
 			
 			e.printStackTrace();
 		}
+        }
+        else {
+        	Image image;
+			try {
+				image = new Image(new FileInputStream(new File("./src/defaultImage.png")));
+				this.staffImage.setFill(new ImagePattern(image));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        }
 	}
 
 	private void returntoDashboard() {
