@@ -28,7 +28,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -94,6 +96,10 @@ public class addStaffController implements ControllerClass{
    	}
    	@Override
    	public void preloadData(Staff staff, Staff toEdit) {
+   		staffImage.setOpacity(100.0);
+		//staffImage.setStroke(Color.SEAGREEN); 
+    	staffImage.setFill(Color.SNOW);
+    //	staffImage.setEffect(new DropShadow(+50d, 0d, +5d, Color.DARKSEAGREEN));
    		
    		this.staff = staff;
    		//staff.setId(0);

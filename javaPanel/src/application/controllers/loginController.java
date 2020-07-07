@@ -41,15 +41,21 @@ public class loginController {
     public void initialize() {
     	userField.setText("admin@root.com");
     	passField.setText("123456789");
+    	userField.setOnMouseClicked(event->{
+    		errorField.setText("");
+    	});
+    	passField.setOnMouseClicked(event->{
+    		errorField.setText("");
+    	});
     	login.setOnAction(event->{
-    			
+    		errorField.setText("");
 Platform.runLater(new Runnable() {
     @Override public void run() {
        
     	login.setDisable(true);
     	login.setVisible(false);
-    	errorField.setText("");
-    	errorField.setText("");
+    	
+    	
     			try {
     				Token token =null;
     				Staff staff;

@@ -6,20 +6,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="484.0" maxWidth="823.0" minHeight="484.0" minWidth="823.0" prefHeight="484.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.dashboardController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.dashboardController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="484.0" prefWidth="246.0" spacing="13.0">
          <children>
-            <Circle fx:id="staffImage" fill="DODGERBLUE" radius="62.0" stroke="BLACK" strokeType="INSIDE" />
-            <Text fx:id="welAdmin" strokeType="OUTSIDE" strokeWidth="0.0" text="welcom" />
-            <Button fx:id="addArticle" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="add article" />
-            <Button fx:id="delArticle" mnemonicParsing="false" text="delete article" />
-            <Button fx:id="editArticle" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="edit article " />
+            <Circle fx:id="staffImage" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0);"  fill="DODGERBLUE" radius="62.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text id="text-id" fx:id="welAdmin" strokeType="OUTSIDE" strokeWidth="0.0" text="welcom">
+               <font>
+                  <Font name="FreeSans" size="13.0" />
+               </font></Text>
+            <Button fx:id="addArticle" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="add post" />
+            <Button fx:id="delArticle" mnemonicParsing="false" prefHeight="28.0" prefWidth="106.0" text="delete post" />
+            <Button fx:id="editArticle" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="edit post" />
             <Button fx:id="addStaff" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="add staff" />
             <Button fx:id="Comments" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Comments" />
-            <Button fx:id="editProfilr" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" text="edit Profile" />
+            <Button fx:id="editProfilr" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="edit Profile" />
             <Button fx:id="logOut" mnemonicParsing="false" text="Log out" />
          </children>
          <opaqueInsets>

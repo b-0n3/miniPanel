@@ -1,9 +1,10 @@
 package  application.models;
 
-import java.io.IOException;
+import java.io.IOException;	
 import java.util.ArrayList;
 import java.util.Optional;
 
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -24,13 +25,14 @@ public class SceneChanger {
 	        Parent parent = loader.load();
 	        
 	        Scene scene = new Scene(parent);
-	        
+	       // scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        //get the stage from the event that was passed in
+	        scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 	        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-	        
+	        stage.setResizable(false);
 	        stage.setTitle(title);
 	        stage.setScene(scene);
-	        stage.setResizable(false);
+	        
 	        stage.show();
 	    
 	}
@@ -42,18 +44,19 @@ public class SceneChanger {
 	        Parent parent = loader.load();
 	        
 	        Scene scene = new Scene(parent);
-	        
+	        scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 	        //access the controller class and preloaded the volunteer data
 	        controllerClass = loader.getController();
 	        controllerClass.preloadData(staff);
 	        
+	      //  scene.getStylesheets().add("./src/application/application.css");
 	        //get the stage from the event that was passed in
 	        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	        
 	        stage.setTitle(title);
-	        
-	        stage.setScene(scene);
 	        stage.setResizable(false);
+	        stage.setScene(scene);
+	        
 	        stage.show();
 	    }
 
@@ -68,13 +71,13 @@ public class SceneChanger {
 		        //access the controller class and preloaded the volunteer data
 		        db = loader.getController();
 		        db.preloadData(staff,pp);
-		        
+		        scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 		        //get the stage from the event that was passed in
 		        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		        
+		        stage.setResizable(false);
 		        stage.setTitle(string2);
 		        stage.setScene(scene);
-		        stage.setResizable(false);
+		      
 		        stage.show();
 			
 		}
@@ -84,7 +87,8 @@ public class SceneChanger {
 		        Parent parent = loader.load();
 		        
 		        Scene scene = new Scene(parent);
-		        
+		        scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+		   //     scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		        //access the controller class and preloaded the volunteer data
 		        db = loader.getController();
 		        if (toEdit != null)
@@ -93,10 +97,10 @@ public class SceneChanger {
 		        	db.preloadData(staff);	
 		        //get the stage from the event that was passed in
 		        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		        
+		        stage.setResizable(false);   
 		        stage.setTitle(string2);
 		        stage.setScene(scene);
-		        stage.setResizable(false);
+		     
 		        stage.show();
 			
 		}
@@ -107,16 +111,17 @@ public class SceneChanger {
 	        Parent parent = loader.load();
 	        
 	        Scene scene = new Scene(parent);
-	        
+	        //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        //access the controller class and preloaded the volunteer data
+	        scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 	        controllerClass = loader.getController();
 	        controllerClass.preloadData(staff);
 	        
 	
-	        
+	        stage.setResizable(false); 
 	        stage.setTitle(title);
 	        stage.setScene(scene);
-	        stage.setResizable(false);
+	       
 	        stage.show();
 	    }
 		public static void showPopUP(String str, String title)

@@ -7,17 +7,15 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-
-<HBox alignment="CENTER" prefHeight="200.0" prefWidth="655.0"
- xmlns:fx="http://javafx.com/fxml/1" xmlns="http://jaCommentsHolderControllervafx.com/javafx/11.0.1" fx:controller="application.controllers.PostHolderController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="548.0" spacing="5.0" style="-fx-background-color: #A07EE6; -fx-background-radius: 15; -fx-border-insets: 0; -fx-border-color: #111; -fx-border-radius: 15; -fx-border-width: 2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.PostHolderController">
    <children>
-      <Circle fx:id="PostImage" fill="DODGERBLUE" radius="59.0" stroke="BLACK" strokeType="INSIDE" />
-      <VBox prefHeight="200.0" prefWidth="496.0">
+      <Circle fx:id="PostImage" fill="DODGERBLUE" radius="59.0" stroke="BLACK" strokeType="INSIDE" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0);" />
+      <VBox prefHeight="200.0" prefWidth="496.0" spacing="5.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="487.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="487.0" spacing="10.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0); -fx-background-radius: 15;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title :" />
-                  <Text fx:id="Title" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="Title :" />
+                  <Text id="text-content" fx:id="Title" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
                <VBox.margin>
                   <Insets />
@@ -26,39 +24,51 @@
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="487.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="487.0" spacing="10.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0); -fx-background-radius: 15;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="tags :" />
-                  <Text fx:id="tags" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="tags :" />
+                  <Text id="text-content" fx:id="tags" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
                <padding>
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="487.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="487.0" spacing="10.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0); -fx-background-radius: 15;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category :" />
-                  <Text fx:id="Category" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="Category :" />
+                  <Text id="text-content" fx:id="Category" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
                <padding>
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="119.0" prefWidth="487.0" spacing="10.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="496.0" spacing="10.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0); -fx-background-radius: 15;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="content :" />
-                  <Text fx:id="Content" strokeType="OUTSIDE" strokeWidth="0.0" text="conten" />
+                  <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="content :" />
+                  <Text id="text-content" fx:id="Content" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
                <padding>
                   <Insets left="10.0" />
                </padding>
             </VBox>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER_RIGHT">
                <children>
                   <Button fx:id="EditMe" mnemonicParsing="false" text="Edit me" />
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>
    </children>
+   <opaqueInsets>
+      <Insets bottom="5.0" left="3.0" right="3.0" top="5.0" />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </HBox>

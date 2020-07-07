@@ -34,9 +34,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -83,6 +85,10 @@ public class dashboardController implements ControllerClass{
 	public void preloadData(Staff staff) {
 		
 		this.staff = staff;
+		//staffImage.setOpacity(100.0);
+	//	staffImage.setStroke(Color.SEAGREEN); 
+    	//staffImage.setFill(Color.SNOW);
+    //	staffImage.setEffect(new DropShadow(+50d, 0d, +5d, Color.DARKSEAGREEN));
 		postIndex = 1;
 		commentindex = 1;
 		Comments.setOnAction(event->{

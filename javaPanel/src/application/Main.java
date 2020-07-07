@@ -16,10 +16,11 @@ public class Main extends Application{
 			try {
 				Parent root= FXMLLoader.load(getClass().getResource("/application/view/login.fxml"));
 				Scene scene = new Scene(root);
-				//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-				primaryStage.setTitle("Dashboard");
-				primaryStage.setScene(scene);
+				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				primaryStage.setTitle("login");
 				primaryStage.setResizable(false);
+				primaryStage.setScene(scene);
+				
 				primaryStage.show();
 				
 			} catch(Exception e) {

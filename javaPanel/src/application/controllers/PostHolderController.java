@@ -26,7 +26,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -54,6 +56,10 @@ public class PostHolderController {
 	    
 	public void preloadData(Staff staff,Post post,boolean toDelete)
 	{
+		//PostImage.setOpacity(100.0);
+	///	PostImage.setStroke(Color.SEAGREEN); 
+		//PostImage.setFill(Color.SNOW);
+		//PostImage.setEffect(new DropShadow(+50d, 0d, +5d, Color.DARKSEAGREEN));
 		
 			Title.setText(post.getTitle());
 			String tag =  " ";

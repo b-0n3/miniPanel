@@ -10,8 +10,10 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<HBox alignment="TOP_CENTER" prefHeight="427.0" prefWidth="556.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.addStaffController">
+<HBox id="root" alignment="TOP_CENTER" prefHeight="427.0" prefWidth="556.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.addStaffController">
+
    <children>
+    
       <VBox alignment="CENTER" prefHeight="427.0" prefWidth="302.0" spacing="20.0">
          <children>
             <TextField fx:id="firstName" promptText="firstname" />
@@ -28,7 +30,7 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="427.0" prefWidth="275.0" spacing="20.0">
          <children>
-            <Circle fx:id="staffImage" fill="DODGERBLUE" radius="81.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="staffImage" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0);"  fill="DODGERBLUE" radius="81.0" stroke="BLACK" strokeType="INSIDE" />
             <PasswordField fx:id="PassField" prefHeight="29.0" prefWidth="246.0" promptText="password" />
             <PasswordField fx:id="confirmPass" promptText="confirm password" />
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="246.0">

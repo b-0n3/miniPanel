@@ -10,18 +10,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="Background" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="15.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.loginController">
+<VBox id="root" fx:id="Background" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="15.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.loginController">
    <children>
       <Pane prefHeight="69.0" prefWidth="600.0">
          <children>
-            <Text layoutX="190.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Login page" wrappingWidth="281.7294921875">
+            <Text id="text-title" layoutX="136.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Login page" wrappingWidth="328.7294921875">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="username :">
+      <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" wrappingWidth="82.29492568969727">
          <VBox.margin>
             <Insets right="100.0" />
          </VBox.margin>
@@ -31,14 +31,14 @@
             <TextField fx:id="userField" prefHeight="26.0" prefWidth="166.0" />
          </children>
       </HBox>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password :">
+      <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :">
          <VBox.margin>
             <Insets right="100.0" />
          </VBox.margin>
       </Text>
       <HBox alignment="CENTER" prefHeight="37.0" prefWidth="600.0">
          <children>
-            <PasswordField fx:id="passField" />
+            <PasswordField fx:id="passField" prefHeight="22.0" prefWidth="168.0" />
          </children>
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="550.0">
@@ -55,7 +55,7 @@
             <Insets right="50.0" />
          </padding>
       </HBox>
-      <Text fx:id="errorField" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text id="text-error" fx:id="errorField" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
    <padding>
       <Insets top="60.0" />
