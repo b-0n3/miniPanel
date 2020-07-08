@@ -25,6 +25,7 @@ import application.models.PostJsonHandler;
 import application.models.SceneChanger;
 import application.models.Staff;
 import application.models.apiReq;
+import application.models.osFinder;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -146,7 +147,14 @@ public class editorController implements ControllerClass {
 			postImage = post.getImage();
 		else
 		{
-			postImage = new File("./src/defaultImage.png");
+			String  path ;
+			if (osFinder.isWindwos)
+			 {
+				 path = osFinder.currentPath + "\\src\\defaultImage.png";
+				 
+			 }else
+				 path = osFinder.currentPath + "/src/defaultImage.png";
+			postImage = new File(path);
 			imageChanged = true;
 		}
 		
@@ -154,7 +162,14 @@ public class editorController implements ControllerClass {
 		
 		postImg.setOnMouseEntered(event->{
 			errorText.setText("");
-			File uploadImg = new File("./src/uploadimage.png");
+			String  path ;
+			if (osFinder.isWindwos)
+			 {
+				 path = osFinder.currentPath + "\\src\\uploadimage.png";
+				 
+			 }else
+				 path = osFinder.currentPath + "/src/uploadimage.png";
+			File uploadImg = new File(path);
 			setPostImg(uploadImg);
 		});
 		
@@ -407,7 +422,14 @@ public class editorController implements ControllerClass {
 		ControllerClass db = new dashboardController();
 		SceneChanger sn = new SceneChanger();
 		try {
-			sn.changeScenes(event, "/application/view/dashboard.fxml", "Dashboard", this.staff, db);
+			String path;
+			if (osFinder.isWindwos)
+			 {
+				 path =  "dashboard.fxml";
+				 
+			 }else
+				 path =  "/application/view/dashboard.fxml";
+			sn.changeScenes(event, path, "Dashboard", this.staff, db);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch 
 			SceneChanger.showPopUP(e1.getMessage(),"Error!" );

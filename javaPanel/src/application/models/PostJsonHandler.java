@@ -69,11 +69,32 @@ public class PostJsonHandler<T>  extends JsonHandler<T>{
 				 apiReq api = new apiReq(url);
 			
 				 path = api.send("GET", true);
+				 if (new File(path).exists())
 				 post.setImage(new File(path));
+				 else {
+					 if (osFinder.isWindwos)
+					 {
+						 path = osFinder.currentPath + "\\src\\defaultImage.png";
+						 
+					 }else
+						 path = osFinder.currentPath + "/src/defaultImage.png";
+					 
+						 
+					 post.setImage(new File(path));
+				 }
 		 }
 			 catch(Exception e)
 			 {
-				 post.setImage(new File("./src/defaultImage.png"));
+				 if (osFinder.isWindwos)
+				 {
+					 path = osFinder.currentPath + "\\src\\defaultImage.png";
+					 
+				 }else
+					 path = osFinder.currentPath + "/src/defaultImage.png";
+				 
+					 
+				 post.setImage(new File(path));
+				 
 			 }
 		 }
 	 }

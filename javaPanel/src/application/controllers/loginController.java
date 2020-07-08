@@ -12,6 +12,7 @@ import application.models.SceneChanger;
 import application.models.Staff;
 import application.models.Token;
 import application.models.apiReq;
+import application.models.osFinder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -39,8 +40,7 @@ public class loginController {
 
     @FXML
     public void initialize() {
-    	userField.setText("admin@root.com");
-    	passField.setText("123456789");
+    	
     	userField.setOnMouseClicked(event->{
     		errorField.setText("");
     	});
@@ -68,7 +68,7 @@ Platform.runLater(new Runnable() {
     					res = api.send("POST", false);
     					if(res.contains("error"))
     					{passField.setText("");
-    						System.out.println("eedsfdsfdsee");
+    						
     						errorField.setText("invalid email or Password");
         					login.setDisable(false);	
                 			login.setVisible(true);
@@ -97,7 +97,15 @@ Platform.runLater(new Runnable() {
     					getCategerys(staff);
     					ControllerClass db = new dashboardController();
     					SceneChanger sn = new SceneChanger();
-    					sn.changeScenes(event, "/application/view/dashboard.fxml", "Dashboard", staff, db);
+    					String path;
+    					if (osFinder.isWindwos)
+    					 {
+    						 path =  "dashboard.fxml";
+    						 
+    					 }else
+    						 path =  "/application/view/dashboard.fxml";
+    					System.out.println(path);
+    					sn.changeScenes(event, path, "Dashboard", staff, db);
     					//System.out.println(staff);
     					//	accesToken = (String)
     			}catch(Exception ex)

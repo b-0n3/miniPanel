@@ -134,7 +134,14 @@ public class Api {
 					String[] olfs = con.getURL().toString().split("/");
 					String oldfilename = olfs[olfs.length -1];
 					String path = getUniqueFileName("." + oldfilename);
-					FileOutputStream fos = new FileOutputStream("./src/images/" + path);
+					String ps;
+					if (osFinder.isWindwos)
+					 {
+						 ps = osFinder.currentPath + "\\src\\images\\";
+						 
+					 }else
+						 ps = osFinder.currentPath + "/src/images/";
+					FileOutputStream fos = new FileOutputStream(ps+ path);
 					fos.write(response);
 					fos.close();
 					return "./src/images/" + path;
@@ -258,7 +265,14 @@ public class Api {
 	     */
 	    public boolean uniqueFileInDirectory(String fileName)
 	    {
-	        File directory = new File("./src/images/");
+	    	String ps;
+			if (osFinder.isWindwos)
+			 {
+				 ps = osFinder.currentPath + "\\src\\images\\";
+				 
+			 }else
+				 ps = osFinder.currentPath + "/src/images/";
+	        File directory = new File(ps);
 	        
 	        File[] dir_contents = directory.listFiles();
 	                

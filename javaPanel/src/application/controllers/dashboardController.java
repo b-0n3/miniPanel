@@ -24,6 +24,7 @@ import application.models.PostJsonHandler;
 import application.models.SceneChanger;
 import application.models.Staff;
 import application.models.apiReq;
+import application.models.osFinder;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -109,10 +110,17 @@ public class dashboardController implements ControllerClass{
 			this.staffImage.setFill(new ImagePattern(image));
 	        }else
 	        {
-	        	System.out.println("type " +type);
+	        	
 	        	Image image;
 				try {
-					image = new Image(new FileInputStream(new File("./src/defaultImage.png")));
+					String  path ;
+					if (osFinder.isWindwos)
+					 {
+						 path = osFinder.currentPath + "\\src\\defaultImage.png";
+						 
+					 }else
+						 path = osFinder.currentPath + "/src/defaultImage.png";
+					image = new Image(new FileInputStream(new File(path)));
 					this.staffImage.setFill(new ImagePattern(image));
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -131,7 +139,14 @@ public class dashboardController implements ControllerClass{
 			ControllerClass db = new dashboardController();
 			SceneChanger sn = new SceneChanger();
 			try {
-				sn.changeScenes(event, "/application/view/Editor.fxml", "Editor", staff, db);
+				String path;
+				if (osFinder.isWindwos)
+				 {
+					 path =  "Editor.fxml";
+					 
+				 }else
+					 path =  "/application/view/Editor.fxml";
+				sn.changeScenes(event, path, "Editor", staff, db);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -157,7 +172,14 @@ public class dashboardController implements ControllerClass{
 			ControllerClass db = new dashboardController();
 			SceneChanger sn = new SceneChanger();
 			try {
-				sn.changeScenes(event, "/application/view/addStaff.fxml", "add User", staff,staff, db);
+				String path;
+				if (osFinder.isWindwos)
+				 {
+					 path =  "addStaff.fxml";
+					 
+				 }else
+					 path =  "/application/view/addStaff.fxml";
+				sn.changeScenes(event, path, "add User", staff,staff, db);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -168,7 +190,14 @@ public class dashboardController implements ControllerClass{
 			
 			SceneChanger sn = new SceneChanger();
 			try {
-				sn.changeScenes(event, "/application/view/login.fxml", "login");
+				String path;
+				if (osFinder.isWindwos)
+				 {
+					 path =  "login.fxml";
+					 
+				 }else
+					 path =  "/application/view/login.fxml";
+				sn.changeScenes(event, path, "login");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -179,7 +208,14 @@ public class dashboardController implements ControllerClass{
 			ControllerClass db = new dashboardController();
 			SceneChanger sn = new SceneChanger();
 			try {
-				sn.changeScenes(event, "/application/view/addStaff.fxml", "add User", staff,null, db);
+				String path;
+				if (osFinder.isWindwos)
+				 {
+					 path =  "addStaff.fxml";
+					 
+				 }else
+					 path =  "/application/view/addStaff.fxml";
+				sn.changeScenes(event, path, "add User", staff,null, db);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -261,7 +297,14 @@ public class dashboardController implements ControllerClass{
             						{
             						try {
             							FXMLLoader loader = new FXMLLoader();
-            						        loader.setLocation(getClass().getResource("/application/view/PostHolder.fxml"));
+            							String path;
+            							if (osFinder.isWindwos)
+            							 {
+            								 path =  "PostHolder.fxml";
+            								 
+            							 }else
+            								 path =  "/application/view/PostHolder.fxml";
+            						        loader.setLocation(getClass().getResource(path));
             						        
             						box = loader.load();
             						box.setId("id" + ind);
@@ -279,7 +322,14 @@ public class dashboardController implements ControllerClass{
             						{
             							try {
                 							FXMLLoader loader = new FXMLLoader();
-                						        loader.setLocation(getClass().getResource("/application/view/PostHolder.fxml"));
+                							String path;
+                							if (osFinder.isWindwos)
+               							 {
+               								 path =  "PostHolder.fxml";
+               								 
+               							 }else
+               								 path =  "/application/view/PostHolder.fxml";
+               						        loader.setLocation(getClass().getResource(path));
                 						        
                 						box = loader.load();
                 						box.setId("id" + ind);
@@ -358,7 +408,15 @@ public class dashboardController implements ControllerClass{
 		{
 			try {
 				 FXMLLoader loader = new FXMLLoader();
-			        loader.setLocation(getClass().getResource("/application/view/CommentsHolder.fxml"));
+				 String path;
+				 if (osFinder.isWindwos)
+				 {
+					 path =  "CommentsHolder.fxml";
+					 
+				 }else
+					 path =  "/application/view/CommentsHolder.fxml";
+			        loader.setLocation(getClass().getResource(path));
+			        
 			        
 			VBox cmtField = loader.load();
 			CommentsHolderController cm = loader.getController();

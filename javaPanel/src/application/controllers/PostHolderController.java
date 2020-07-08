@@ -21,6 +21,7 @@ import application.models.Post;
 import application.models.SceneChanger;
 import application.models.Staff;
 import application.models.apiReq;
+import application.models.osFinder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -92,7 +93,14 @@ public class PostHolderController {
 	        {
 	        	Image image;
 				try {
-					image = new Image(new FileInputStream(new File("./src/defaultImage.png")));
+					String path;
+					if (osFinder.isWindwos)
+					 {
+						 path = osFinder.currentPath + "\\src\\defaultImage.png";
+						 
+					 }else
+						 path = osFinder.currentPath + "/src/defaultImage.png";
+					image = new Image(new FileInputStream(new File(path)));
 					this.PostImage.setFill(new ImagePattern(image));
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -106,7 +114,14 @@ public class PostHolderController {
 				ControllerClass db = new dashboardController();
 				SceneChanger sn = new SceneChanger();
 				try {
-					sn.changeScenes(event, "/application/view/Editor.fxml", "Editor", staff, db,post);
+					String path;
+					if (osFinder.isWindwos)
+					 {
+						 path =  "Editor.fxml";
+						 
+					 }else
+						 path =  "/application/view/Editor.fxml";
+					sn.changeScenes(event, path, "Editor", staff, db,post);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

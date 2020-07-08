@@ -149,6 +149,7 @@ public class Post {
 		String imagename=null;
 		File image;
 		System.out.println(ar);
+		String path;
 		if(ar.has("image"))
 		{
 			url = ar.getString("image");
@@ -156,8 +157,17 @@ public class Post {
 		//	imagename = ar.getString("");
 		}
 		else
-		image = new File("./src/defaultImage.png");
+		{
 			
+			if (osFinder.isWindwos)
+			 {
+				 path = osFinder.currentPath + "\\src\\defaultImage.png";
+				 
+			 }else
+				 path = osFinder.currentPath + "/src/defaultImage.png";
+		image = new File(path);
+		}
+		
 		 
 		Post p = new Post(ar.getString("title"),
 				ar.getString("content"),ar.getInt("id"),

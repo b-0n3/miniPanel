@@ -16,6 +16,7 @@ import application.models.SceneChanger;
 import application.models.Staff;
 import application.models.StaffJsonHandler;
 import application.models.apiReq;
+import application.models.osFinder;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventDispatchChain;
@@ -188,7 +189,14 @@ public class addStaffController implements ControllerClass{
    					save.setDisable(false);
    					SceneChanger sn = new SceneChanger();
    					try {
-   						sn.changeScenes(event, "/application/view/login.fxml", "login");
+   						String path;
+   						if (osFinder.isWindwos)
+   						 {
+   							 path =  "login.fxml";
+   							 
+   						 }else
+   							 path =  "/application/view/login.fxml";
+   						sn.changeScenes(event,path, "login");
    					} catch (Exception e1) {
    						e1.printStackTrace();
    					}
@@ -210,8 +218,14 @@ public class addStaffController implements ControllerClass{
    			
    			
    			staffImage.setOnMouseEntered(event->{
-   		
-   				File uploadImg = new File("./src/uploadimage.png");
+   				String  path ;
+				if (osFinder.isWindwos)
+				 {
+					 path = osFinder.currentPath + "\\src\\uploadimage.png";
+					 
+				 }else
+					 path = osFinder.currentPath + "/src/uploadimage.png";
+   				File uploadImg = new File(path);
    				setStaffImg(uploadImg);
    			});
    			
@@ -256,7 +270,14 @@ public class addStaffController implements ControllerClass{
         else {
         	Image image;
 			try {
-				image = new Image(new FileInputStream(new File("./src/defaultImage.png")));
+				String  path;
+				if (osFinder.isWindwos)
+				 {
+					 path = osFinder.currentPath + "\\src\\defaultImage.png";
+					 
+				 }else
+					 path = osFinder.currentPath + "/src/defaultImage.png";
+				image = new Image(new FileInputStream(new File(path)));
 				this.staffImage.setFill(new ImagePattern(image));
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -269,7 +290,14 @@ public class addStaffController implements ControllerClass{
 		ControllerClass db = new dashboardController();
 		SceneChanger sn = new SceneChanger();
 		try {
-			sn.changeScenes((Stage) this.Cancel.getScene().getWindow(), "/application/view/dashboard.fxml", "Dashboard", staff, db);
+			String path;
+			if (osFinder.isWindwos)
+			 {
+				 path =  "dashboard.fxml";
+				 
+			 }else
+				 path =  "/application/view/dashboard.fxml";
+			sn.changeScenes((Stage) this.Cancel.getScene().getWindow(), path, "Dashboard", staff, db);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch 
 			e1.printStackTrace();

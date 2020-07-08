@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="48.0" prefWidth="253.0" style="-fx-background-radius: 15; -fx-background-color: #A07EE6; -fx-border-color: #111; -fx-border-inset: 1; -fx-border-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.CommentsHolderController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="253.0" spacing="10.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0);">
+         <children>
+            <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" />
+            <Text id="text-content" fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="253.0" spacing="10.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0);">
+         <children>
+            <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+            <Text id="text-content" fx:id="email" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="253.0" spacing="10.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0);">
+         <children>
+            <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="WebSite :" />
+            <Text id="text-content" fx:id="webSite" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="15.0" prefWidth="253.0" spacing="10.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0.0, 0.0);">
+         <children>
+            <Text id="text-id" strokeType="OUTSIDE" strokeWidth="0.0" text="Content :" />
+            <Text id="text-content" fx:id="Content" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+   </padding>
+</VBox>

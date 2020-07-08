@@ -8,7 +8,7 @@ import java.util.List;
 import org.json.JSONObject;
 
 public class Staff {
-	public static final String APILINK="http://99ef144fe97c.ngrok.io/api";
+	public static  String APILINK="nothing";
 	private String Name,email;
 	private int level;
 	private int id;
@@ -144,19 +144,27 @@ public void setPassword(String pass)
 	}
 
 	public static Staff fromJsonObject(JSONObject jso) {
-		String path;
+		String path = "";
+		String pt;
 		if(jso.has("image_profile"))
 		{
 	apiReq api = new apiReq(jso.getString("image_profile"));
 	
 	path = api.send("GET", true);
-		}else
-			path = "./src/defaultImage.png";
+		}
+		
+		if (osFinder.isWindwos)
+		 {
+			 pt = osFinder.currentPath + "\\src\\defaultImage.png";
+			 
+		 }else
+			 pt = osFinder.currentPath + "/src/defaultImage.png";
+		
 		File img;	
 		if(new File(path).exists())
 			img = new File(path);
 		else
-		img = new File(path);
+		img = new File(pt);
 Staff stf = new Staff(jso.getString("name"),
 		jso.getString("email"),
 		jso.getInt("id"),
